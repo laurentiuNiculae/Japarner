@@ -7,13 +7,9 @@ const app = express()
 const expressLayouts = require('express-ejs-layouts')
 
 const indexRouter = require('./routes/index')
-<<<<<<< HEAD
-
-=======
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 const wordsRouter = require('./routes/words')
->>>>>>> b97e6d3026ca8aae23507e6d3af57f60cdd548af
 
 app.set('view engine','ejs')
 app.set('views', __dirname + '/views')
