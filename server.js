@@ -7,13 +7,29 @@ const app = express()
 const expressLayouts = require('express-ejs-layouts')
 
 const indexRouter = require('./routes/index')
+<<<<<<< HEAD
 
+=======
+const loginRouter = require('./routes/login')
+const registerRouter = require('./routes/register')
+const wordsRouter = require('./routes/words')
+>>>>>>> b97e6d3026ca8aae23507e6d3af57f60cdd548af
 
 app.set('view engine','ejs')
 app.set('views', __dirname + '/views')
 app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))  //params are set in body
+app.use(express.json())
+app.use(flash())
+app.use(session({
+    secret: 'abcdefg',
+    resave: true,
+    saveUninitialized: false
+}));
+app.use(passport.initialize())
+app.use(passport.session())
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DATABASE_URL, 
@@ -24,5 +40,8 @@ db.on('error', error => console.error(error))
 db.once('open', () => console.error("Connected to Mongoose"))
 
 app.use('/', indexRouter)
+app.use('/login', loginRouter)
+app.use('/register', registerRouter)
+app.use('/words', wordsRouter)
 
 app.listen(process.env.PORT || 3000)
