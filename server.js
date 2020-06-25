@@ -21,7 +21,7 @@ initializePassport(passport,
 const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
-
+const wordsRouter = require('./routes/words')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -29,6 +29,7 @@ app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))  //params are set in body
+app.use(express.json())
 app.use(flash())
 app.use(session({
     secret: 'abcdefg',
@@ -47,5 +48,6 @@ db.once('open', () => console.error("Connected to Mongoose"))
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
+app.use('/words', wordsRouter)
 
 app.listen(process.env.PORT || 3000)
