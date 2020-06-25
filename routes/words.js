@@ -8,7 +8,7 @@ router.get('/', checkAuthentificated ,(req, res) => {
 })
 
 router.post('/', checkAuthentificated, (req,res) =>{
-    
+
 })
 
 module.exports = router
