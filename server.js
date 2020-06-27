@@ -9,7 +9,7 @@ const expressLayouts = require('express-ejs-layouts')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
-
+const bodyParser = require('body-parser');
 
 const User = require('./models/user')
 const initializePassport = require('./passport-config')
@@ -22,7 +22,7 @@ initializePassport(passport,
 const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
-const wordsRouter = require('./routes/words')
+const apiRouter = require('./routes/api')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -39,6 +39,7 @@ app.use(session({
 }));
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(bodyParser.json());
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true,useUnifiedTopology: true})
@@ -49,6 +50,6 @@ db.once('open', () => console.error("Connected to Mongoose"))
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
-app.use('/words', wordsRouter)
+app.use('/api', apiRouter)
 
 app.listen(process.env.PORT || 3000)

@@ -2,12 +2,12 @@ const express = require('express')
 const router = express.Router()
 const checkAuthentificated = require('../public/checkAuthentificated').checkAuthentificated
 
-const Word = require('../models/word')
+const Lable = require('../models/lable')
 
-router.get('/', async (req, res) => { //
+router.get('/', checkAuthentificated , async (req, res) => { //
     let response = {}
     try {
-        response.content = await Word.find({ownerId: req.user._id.toString()})
+        response.content = await Lable.find({ownerId: req.user._id.toString()})
         response.success = true
         response.error = {}
     } catch (error) {
@@ -19,9 +19,9 @@ router.get('/', async (req, res) => { //
     res.json(response)
 })
 
-router.post('/', checkAuthentificated ,async (req, res) => {
+router.post('/', checkAuthentificated, (req,res) =>{
     let response = {}
-    let word = new Word({
+    let lable = new Lable({
         ownerId: req.user._id.toString(),
         content: req.body.content,
         phoneticReading: req.body.phoneticReading,
@@ -29,7 +29,7 @@ router.post('/', checkAuthentificated ,async (req, res) => {
         example: req.body.example
     })
     try {
-        await word.save()
+        await lable.save()
         response.success = true
         response.content = {}
         response.error = {}

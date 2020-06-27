@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const wordSchema = new mongoose.Schema({
+    ownerId : {
+        type: String,
+        required : true
+    },
     content : {
         type: String,
         required : true
@@ -9,8 +13,8 @@ const wordSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    meaning : {
-        type: String,
+    meanings : {
+        type: [String],
         required: true
     },
     example : {
