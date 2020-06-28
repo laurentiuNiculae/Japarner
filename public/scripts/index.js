@@ -1,11 +1,10 @@
 (function (){
-    var wordForm = document.getElementById('addWordForm')
+    var wordForm = document.getElementById('add-word-form')
     wordForm.onsubmit = function(e){
         e.preventDefault()
-        console.log(e.target)
     }
 
-    var submitButton = document.getElementById('submitWord')
+    var submitButton = document.getElementById('submit-word')
     submitButton.onclick = function(e){
         // collect data
         // make request

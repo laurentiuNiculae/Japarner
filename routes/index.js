@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const checkAuthentificated = require('../public/checkAuthentificated').checkAuthentificated
+const checkAuthenticated = require('../public/checkAuthenticated').checkAuthenticated
 
-router.get('/', checkAuthentificated ,(req, res) => {
+router.get('/', checkAuthenticated ,(req, res) => {
     res.render('index', {name: req.user.name})
 
 })

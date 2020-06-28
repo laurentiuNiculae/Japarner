@@ -2,13 +2,14 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const User = require('../models/user')
-const checkNotAuthentificated = require('../public/checkAuthentificated').checkNotAuthentificated
+const label = require('../models/label')
+const checkNotAuthenticated = require('../public/checkAuthenticated').checkNotAuthenticated
 
-router.get('/', checkNotAuthentificated ,(req, res) => {
+router.get('/', checkNotAuthenticated ,(req, res) => {
     res.render('register/register', { message: "" })
 })
 
-router.post('/', checkNotAuthentificated ,async (req, res) => {
+router.post('/', checkNotAuthenticated ,async (req, res) => {
     try {
         const exists = await User.findOne({ email: req.body.email })
         if (exists) {

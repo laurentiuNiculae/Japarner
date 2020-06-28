@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const lableSchema = new mongoose.Schema({
+const labelSchema = new mongoose.Schema({
     ownerId : {
         type: String,
         required : true
@@ -11,4 +11,4 @@ const lableSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Lable',lableSchema)
+module.exports = mongoose.model('Label',labelSchema)

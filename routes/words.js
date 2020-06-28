@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const checkAuthentificated = require('../public/checkAuthentificated').checkAuthentificated
-
+const checkAuthenticated = require('../public/checkAuthenticated').checkAuthenticated
 const Word = require('../models/word')
 
 router.get('/', async (req, res) => { //
@@ -19,7 +18,7 @@ router.get('/', async (req, res) => { //
     res.json(response)
 })
 
-router.post('/', checkAuthentificated ,async (req, res) => {
+router.post('/', checkAuthenticated ,async (req, res) => {
     let response = {}
     let word = new Word({
         ownerId: req.user._id.toString(),

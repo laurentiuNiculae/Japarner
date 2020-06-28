@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const checkAuthentificated = require('../public/checkAuthentificated').checkAuthentificated
+const checkAuthenticated = require('../public/checkAuthenticated').checkAuthenticated
 
 const wordsRouter = require('./words')
-const categoriesRouter = require('./categories')
+const labelRouter = require('./labels')
 
 router.use('/words',wordsRouter)
-router.use('/categories',categoriesRouter)
+router.use('/labels',labelRouter)
 
 
 module.exports = router
