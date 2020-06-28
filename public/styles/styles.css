@@ -1,0 +1,43 @@
+.rate * , 
+.knowledge-level > p{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate > input {
+    display:none;
+}
+.rate > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+
+
+.tag-list{
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tag-element{
+    display: inline;
+}
+.tag-input{
+    border: 0px black solid;
+}
+.tag-input:focus {
+    outline: 0px solid white;
+}

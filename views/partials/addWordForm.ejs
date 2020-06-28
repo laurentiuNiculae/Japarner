@@ -1,0 +1,12 @@
+<form id = "add-word-form"> 
+    <input type="text" placeholder="Word" name = "content">
+    <input type="text" placeholder="Reading" name = "reading">
+    <div class="meanings">
+        <input type="text" placeholder="Meaning" name = "meaning">
+        <button>Add More</button>
+    </div>
+    <input type="text" placeholder="Example" name = "example">
+    <%- include ("knowledgeLevel") %>
+    <%- include ("labelsTags") %>
+    <button class="submit-word" id="submit-word">Add Word</button> 
+</form>
