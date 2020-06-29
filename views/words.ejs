@@ -1,0 +1,12 @@
+<div>
+    Select labels
+    <%- include ("partials/labelsTags.ejs") %>
+</div>
+<div class="word-table">
+    <h2>Vocabulary</h2>
+    <ul class="word-list">
+        <% words.forEach(word => { %>
+            <li> <%= word.content %> </li> <br>
+         <% }); %>
+    </ul>
+</div>

@@ -29,9 +29,8 @@ router.post('/', checkAuthenticated, async (req,res) =>{
         example: req.body.example
     })
     try {
-        await label.save()
+        response.content = await label.save()
         response.success = true
-        response.content = {}
         response.error = {}
         res.json(response)
     } catch (error) {
