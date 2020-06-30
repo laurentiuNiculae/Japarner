@@ -5,8 +5,9 @@ const checkAuthenticated = require('../public/checkAuthenticated').checkAuthenti
 
 router.get('/', checkAuthenticated , async (req, res) => {
 
+    let userWords = await Word.find({ownerId: req.user._id.toString()})
 
-    res.render('words', {words:[{content:'bunica'},　{content:'差べぁ'}]})
+    res.render('words', {words:userWords})
 
 })
 

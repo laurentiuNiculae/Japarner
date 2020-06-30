@@ -7,7 +7,8 @@ const Label = require('../models/label')
 router.get('/', checkAuthenticated , async (req, res) => { //
     let response = {}
     try {
-        response.content = await Label.find({ownerId: req.user._id.toString()})
+        response.content = await Label.find({ownerId: req.user._id.toString()}).select('content')
+        response.content = response.content.map(doc => doc.content) // we keep just the content
         response.success = true
         response.error = {}
     } catch (error) {
@@ -28,6 +29,9 @@ router.post('/', checkAuthenticated, async (req,res) =>{
         meanings: req.body.meanings,
         example: req.body.example
     })
+
+    //test if it's ok to add.
+
     try {
         response.content = await label.save()
         response.success = true

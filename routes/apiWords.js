@@ -21,12 +21,15 @@ router.get('/', async (req, res) => { //
 
 router.post('/', checkAuthenticated ,async (req, res) => {
     let response = {}
+    console.log(req.body)
     let word = new Word({
         ownerId: req.user._id.toString(),
         content: req.body.content,
         phoneticReading: req.body.phoneticReading,
         meanings: req.body.meanings,
-        example: req.body.example
+        example: req.body.example,
+        labels: req.body.labels,
+        knowledgeLevel: req.body.knowledgeLevel
     })
     try {
         response.content = await word.save()

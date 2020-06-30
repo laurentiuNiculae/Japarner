@@ -1,6 +1,6 @@
-let labelArray
+let labelArray = null
 
-function findSuggestion(input) {
+function findLabelSuggestion(input) {
     let suggestion = []
 
     suggestion = labelArray.filter(element => {
@@ -13,7 +13,7 @@ function findSuggestion(input) {
     return suggestion
 }
 
-function getTagObject(content) {
+function createTagObject(content) {
     let template = document.createElement('template')
     template.innerHTML =
         `<div class="tag-element">
@@ -26,19 +26,30 @@ function getTagObject(content) {
     return template.content  // this is so much simple :O
 }
 
-(function initializeLabelArray() {
-    
+(async function initializeLabelArray() {
+    try {
+        let response = await fetch('/api/labels', {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        labelArray = (await response.json()).content;
+    } catch (error) {
+        console.log(error)
+    }
 })();
 
 (function () {
-    console.log("bunica")
     var tagInput = document.getElementById("tag-input")
     var tagList = document.getElementById("tag-list")
-    tagInput.oninput = () => {
+    tagInput.oninput = (e) => {
         // we will calculate the search options
+        let suggestion = findLabelSuggestion(tagInput.value)
     }
     tagInput.onchange = () => {
-        tagList.insertBefore(getTagObject(tagInput.value), tagInput)
+        tagList.insertBefore(createTagObject(tagInput.value), tagInput)
         tagInput.value = ""
     }
 })();
