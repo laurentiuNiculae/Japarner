@@ -41,12 +41,12 @@ async function postWord(wordData) {
 
 (function () {
     var wordForm = document.getElementById('add-word-form')
-    wordForm.onsubmit = function (e) {
+    wordForm.addEventListener('submit', function (e) {
         e.preventDefault()
-    }
+    })
 
     var submitButton = document.getElementById('submit-word')
-    submitButton.onclick = async function (e) {
+    submitButton.addEventListener('click', async function (e) {
         // collect data
         let wordData = getWordFormData(wordForm)
         console.log(wordData)
@@ -54,19 +54,19 @@ async function postWord(wordData) {
         let response = await postWord(wordData)
         console.log(response)
         //manage the response
-    }
+    })
     console.log('addedEvent')
 })();
 
-(function addMeaningsEvent(){
+(function addMeaningsEvent() {
     let addMoreButton = document.getElementById('add-more-meanings')
 
-    addMoreButton.onclick = (event) => {
+    addMoreButton.addEventListener('click', (event) => {
         let inputTemplate = document.createElement('template')
         inputTemplate.innerHTML = '<input type="text" placeholder="Meaning" name = "meaning">'
         let wordMeanings = document.getElementById('word-meanings')
-        wordMeanings.insertBefore(inputTemplate.content , event.target)
-    }
+        wordMeanings.insertBefore(inputTemplate.content, event.target)
+    })
 })();
 
 

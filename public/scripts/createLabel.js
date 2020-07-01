@@ -19,7 +19,7 @@ async function postLabel(labelData) {
 
 (function () {
     let labelForm = document.getElementById('create-label-form')
-    labelForm.onsubmit = async (event) => {
+    labelForm.addEventListener('submit', async (event) => {
         event.preventDefault()
 
         let labelData = {}
@@ -28,9 +28,8 @@ async function postLabel(labelData) {
         // test if it's ok to add.
 
         let response = await postLabel(labelData)
-        console.log(response)
         labelForm.querySelector('input').value = ""
 
-    }
+    })
 
-})();
+}) ();

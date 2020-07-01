@@ -22,9 +22,9 @@ function createTagObject(content) {
         <span class="tag-element-text" data-value=${content}>${content}</span> 
         <button class="delete-tag-button" type="button">x</button> 
     </div>`
-    template.content.querySelector('button').onclick = (event) => {
+    template.content.querySelector('button').addEventListener('click', (event) => {
         event.target.parentNode.remove()
-    }
+    })
     return template.content  // this is so much simple :O
 }
 
@@ -65,7 +65,7 @@ function displayAutocompleteOptions(tagInput, suggestion) {
         unitSuggestion.innerHTML = `<strong>${element.substr(0, searchValue.length)}</strong>${element.substr(searchValue.length)} 
         <input type='hidden' value="${element}">`
 
-        unitSuggestion.onclick = (e) => {
+        unitSuggestion.addEventListener('click', (e) => {
             let currentInput = e.currentTarget.querySelector('input') // we might click on the <strong> tag so we need to bubble it up
 
             if (currentInput) {
@@ -75,7 +75,7 @@ function displayAutocompleteOptions(tagInput, suggestion) {
                 tagInput.value = ""
                 closeRecommendationList()
             }
-        }
+        })
 
         autocompleteDiv.appendChild(unitSuggestion) // we stack them here
     })
@@ -106,13 +106,13 @@ function displayAutocompleteOptions(tagInput, suggestion) {
     var tagList = document.getElementById('tag-list')
     var autocomplete = document.getElementById('autocomplete')
 
-    tagInput.oninput = (e) => {
+    tagInput.addEventListener('input', (e) => {
         closeRecommendationList()
         currentFocus = -1  //focus on input
         // we will calculate the search options
         let suggestion = findLabelSuggestion(tagInput.value)
         displayAutocompleteOptions(tagInput, suggestion)
-    }
+    })
 
     autocomplete.addEventListener('keydown', (event) => {
         switch (event.code) {
