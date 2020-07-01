@@ -31,12 +31,15 @@
     border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
 }
 .tag-element{
     display: inline;
+    position: relative;
 }
 .tag-input{
     border: 0px black solid;
+    position: relative;
 }
 .tag-input:focus {
     outline: 0px solid white;
@@ -44,3 +47,20 @@
 
 
 /*  */
+
+
+.autocomplete-list{
+    background: white;
+    border-top: 1px black solid;
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+    top: 100%;
+    position: absolute;
+}
+
+.unit-suggestion:hover {
+    background: gray;
+}
+.autocomplete-active{
+    background: blue !important;
+}
