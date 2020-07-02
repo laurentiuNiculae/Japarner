@@ -1,12 +1,12 @@
-<form id = "add-word-form"> 
-    <input type="text" placeholder="Word" name = "content">
-    <input type="text" placeholder="Reading" name = "reading">
-    <div class="meanings">
+<form autocomplete="off" id = "add-word-form"> 
+    <input id="word-content" type="text" placeholder="Word" name = "content">
+    <input id="word-reading"type="text" placeholder="Reading" name = "reading">
+    <div id="word-meanings" class="meanings">
         <input type="text" placeholder="Meaning" name = "meaning">
-        <button>Add More</button>
+        <button id="add-more-meanings" class="add-more-meanings" type="button">Add More</button>
     </div>
-    <input type="text" placeholder="Example" name = "example">
+    <input id="word-example" type="text" placeholder="Example" name = "example">
     <%- include ("knowledgeLevel") %>
     <%- include ("labelsTags") %>
-    <button class="submit-word" id="submit-word">Add Word</button> 
+    <button class="submit-word" id="submit-word" type="button">Add Word</button> 
 </form>

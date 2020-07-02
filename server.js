@@ -23,6 +23,7 @@ const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 const apiRouter = require('./routes/api')
+const wordsRouter = require('./routes/words')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -42,6 +43,7 @@ app.use(passport.session())
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose')
+const word = require('./models/word')
 mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true,useUnifiedTopology: true})
 const db = mongoose.connection
 db.on('error', error => console.error(error))
@@ -51,5 +53,6 @@ app.use('/', indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 app.use('/api', apiRouter)
+app.use('/words',wordsRouter)
 
 app.listen(process.env.PORT || 3000)
