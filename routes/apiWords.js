@@ -5,7 +5,6 @@ const Word = require('../models/word')
 
 router.get('/', async (req, res) => { //
     let response = {}
-    console.log(req.headers)
     try {
         response.content = await Word.find({ownerId: req.user._id.toString()})
         response.success = true

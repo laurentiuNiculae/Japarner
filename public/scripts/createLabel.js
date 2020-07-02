@@ -10,7 +10,7 @@ async function postLabel(labelData) {
             body: JSON.stringify(labelData)
         })
     } catch (error) {
-        console.log('Fetch Error :-S', error)
+        console.error('Fetch Error', error)
         response.error = error
     }
     return response.json()

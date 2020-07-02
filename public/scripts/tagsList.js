@@ -1,38 +1,38 @@
 let labelArray = null
 let currentFocus = -1
 
-function findLabelSuggestion(input) {
-    if (input === '')
+function findLabelSuggestions(input) {
+    if (input === '') {
         return []
-    let suggestion = []
+    }
+    let suggestions = []
 
-    suggestion = labelArray.filter(element => {
-        if (input.length > element.length)
+    suggestions = labelArray.filter(element => {
+        if (input.length > element.length) {
             return false
+        }
         return input.toUpperCase() === element.substring(0, input.length).toUpperCase()
     })
 
-    return suggestion
+    return suggestions
 }
 
 function createTagObject(content) {
     let template = document.createElement('template')
     template.innerHTML =
         `<div class="tag-element">
-        <span class="tag-element-text" data-value=${content}>${content}</span> 
-        <button class="delete-tag-button" type="button">x</button> 
-    </div>`
+            <span class="tag-element-text" data-value=${content}>${content}</span> 
+            <button class="delete-tag-button" type="button">x</button> 
+        </div>`
     template.content.querySelector('button').addEventListener('click', (event) => {
         event.target.parentNode.remove()
     })
     return template.content  // this is so much simple :O
 }
 
-function closeRecommendationList() {
+function closeAutocompleteList() {
     let lists = document.querySelectorAll('.autocomplete-list')
-    if (lists) {
-        lists.forEach(element => element.remove())
-    }
+    lists.forEach(element => element.remove())
 }
 
 function setActive(autocompleteList) {
@@ -40,26 +40,24 @@ function setActive(autocompleteList) {
         setAllInactive()
         autocompleteList.querySelectorAll('.unit-suggestion')[currentFocus].classList.add('autocomplete-active')
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
-
 }
 
 function setAllInactive() {
-    let autocompleteList = document.getElementById('autocomplete-list')
-    autocompleteList.querySelectorAll('.unit-suggestion').forEach(element => {
+    document.querySelectorAll('#autocomplete-list .unit-suggestion').forEach(element => {
         element.classList.remove('autocomplete-active');
     })
 }
 
-function displayAutocompleteOptions(tagInput, suggestion) {
+function displayAutocompleteOptions(tagInput, suggestions) {
     let template = document.createElement('template')
     let searchValue = tagInput.value
     let autocompleteDiv = document.createElement('div')
     autocompleteDiv.setAttribute('class', 'autocomplete-list')
     autocompleteDiv.setAttribute('id', 'autocomplete-list')
 
-    suggestion.forEach((element) => {
+    suggestions.forEach((element) => {
         let unitSuggestion = document.createElement('div')
         unitSuggestion.setAttribute('class', 'unit-suggestion')
         unitSuggestion.innerHTML = `<strong>${element.substr(0, searchValue.length)}</strong>${element.substr(searchValue.length)} 
@@ -73,7 +71,7 @@ function displayAutocompleteOptions(tagInput, suggestion) {
                 let tagList = document.getElementById('tag-list')
                 tagList.insertBefore(createTagObject(value), document.getElementById('autocomplete'))
                 tagInput.value = ""
-                closeRecommendationList()
+                closeAutocompleteList()
             }
         })
 
@@ -97,21 +95,21 @@ function displayAutocompleteOptions(tagInput, suggestion) {
         })
         labelArray = (await response.json()).content;
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 })();
 
 (function setLabelTagEvents() {
-    var tagInput = document.getElementById('tag-input')
-    var tagList = document.getElementById('tag-list')
-    var autocomplete = document.getElementById('autocomplete')
+    const tagInput = document.getElementById('tag-input')
+    const tagList = document.getElementById('tag-list')
+    const autocomplete = document.getElementById('autocomplete')
 
     tagInput.addEventListener('input', (e) => {
-        closeRecommendationList()
+        closeAutocompleteList()
         currentFocus = -1  //focus on input
         // we will calculate the search options
-        let suggestion = findLabelSuggestion(tagInput.value)
-        displayAutocompleteOptions(tagInput, suggestion)
+        let suggestions = findLabelSuggestions(tagInput.value)
+        displayAutocompleteOptions(tagInput, suggestions)
     })
 
     autocomplete.addEventListener('keydown', (event) => {
@@ -134,15 +132,14 @@ function displayAutocompleteOptions(tagInput, suggestion) {
                 if (currentFocus == -1) {
                     tagList.insertBefore(createTagObject(tagInput.value), document.getElementById('autocomplete'))
                     tagInput.value = ""
-                    closeRecommendationList()
+                    closeAutocompleteList()
                 } else {
                     let focusedValue = tagList.querySelector('.autocomplete-active > input').value
                     tagList.insertBefore(createTagObject(focusedValue), document.getElementById('autocomplete'))
                     tagInput.value = ""
-                    closeRecommendationList()
+                    closeAutocompleteList()
                 }
                 break
-
         }
     })
 })();

@@ -5,20 +5,21 @@ function getWordFormData(form) {
     wordData.phoneticReading = document.getElementById('word-reading').value
     wordData.example = document.getElementById('word-example').value
     //get meanings
-    wordData.meanings = Array.from(document.getElementById('word-meanings').querySelectorAll('input')).map((word) => { return word.value })
-
+    const currentWordMeaningsInputs = document.getElementById('word-meanings').querySelectorAll('input');
+    wordData.meanings = Array.from(currentWordMeaningsInputs).map((wordInput) => { return wordInput.value })
     //get knowledge level
     let reducer = (accumulator, currentValue) => {
-        if (currentValue.checked) {
-            return accumulator + parseInt(currentValue.value)
-        } else { return accumulator }
+        return accumulator + (currentValue.checked ? parseInt(currentValue.value) : 0)
     }
-    wordData.knowledgeLevel = Array.from(document.getElementById('word-knowledge-rate').querySelectorAll('input')).reduce(reducer, 0)
-    if (wordData == 0)
-        wordData = 1;
+    let knowledgeRateSelector = document.getElementById('word-knowledge-rate').querySelectorAll('input')
+    wordData.knowledgeLevel = Array.from(knowledgeRateSelector).reduce(reducer, 0)
+    if (wordData.knowledgeLevel == 0) {
+        wordData.knowledgeLevel = 1;
+    }
 
     // labels
-    wordData.labels = Array.from(document.getElementById('tag-list').querySelectorAll('.tag-element-text')).map((labelSpan => { return labelSpan.getAttribute('data-value') }))
+    wordLabels = document.getElementById('tag-list').querySelectorAll('.tag-element-text')
+    wordData.labels = Array.from(wordLabels).map((labelSpan => { return labelSpan.getAttribute('data-value') }))
     return wordData
 }
 
@@ -35,6 +36,7 @@ async function postWord(wordData) {
         })
     } catch (error) {
         response = error
+        console.error(error)
     }
     return response.json()
 }
@@ -49,13 +51,10 @@ async function postWord(wordData) {
     submitButton.addEventListener('click', async function (e) {
         // collect data
         let wordData = getWordFormData(wordForm)
-        console.log(wordData)
         // make request
         let response = await postWord(wordData)
-        console.log(response)
         //manage the response
     })
-    console.log('addedEvent')
 })();
 
 (function addMeaningsEvent() {

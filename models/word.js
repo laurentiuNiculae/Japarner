@@ -28,6 +28,10 @@ const wordSchema = new mongoose.Schema({
     knowledgeLevel : {
         type: Number,
         default: 1
+    },
+    postDate : {
+        type: Date,
+        default: Date.now()
     }
 })
 
