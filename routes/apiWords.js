@@ -1,20 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const checkAuthenticated = require('../public/checkAuthenticated').checkAuthenticated
+const paginatedResults = require('../public/paginateResults').paginatedResults
 const Word = require('../models/word')
 
-router.get('/', async (req, res) => { //
-    let response = {}
-    try {
-        response.content = await Word.find({ownerId: req.user._id.toString()})
-        response.success = true
-        response.error = {}
-    } catch (error) {
-        response.error = error
-        response.content = {}
-        response.success = true
-    }
+router.get('/', checkAuthenticated, paginatedResults(Word) ,async (req, res) => { //
 
+    let response = {}
+    response.success = true
+    response.content = res.paginatedResults
+    response.error = {}
+   console.log(response)
     res.json(response)
 })
 

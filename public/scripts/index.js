@@ -12,9 +12,9 @@ function getWordFormData(form) {
         return accumulator + (currentValue.checked ? parseInt(currentValue.value) : 0)
     }
     let knowledgeRateSelector = document.getElementById('word-knowledge-rate').querySelectorAll('input')
-    wordData.knowledgeLevel = Array.from(knowledgeRateSelector).reduce(reducer, 0)
-    if (wordData.knowledgeLevel == 0) {
-        wordData.knowledgeLevel = 1;
+    wordData.knowledgeLevel = Array.from(knowledgeRateSelector).reduce(reducer, 0).toString()
+    if (wordData.knowledgeLevel == '0') {
+        wordData.knowledgeLevel = '1';
     }
 
     // labels

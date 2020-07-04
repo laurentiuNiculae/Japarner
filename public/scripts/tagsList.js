@@ -21,7 +21,7 @@ function createTagObject(content) {
     let template = document.createElement('template')
     template.innerHTML =
         `<div class="tag-element">
-            <span class="tag-element-text" data-value=${content}>${content}</span> 
+            <span class="tag-element-text" data-value="${content}">${content}</span> 
             <button class="delete-tag-button" type="button">x</button> 
         </div>`
     template.content.querySelector('button').addEventListener('click', (event) => {
@@ -129,11 +129,7 @@ function displayAutocompleteOptions(tagInput, suggestions) {
                 setActive(event.currentTarget.querySelector('#autocomplete-list'))
                 break
             case 'Enter':
-                if (currentFocus == -1) {
-                    tagList.insertBefore(createTagObject(tagInput.value), document.getElementById('autocomplete'))
-                    tagInput.value = ""
-                    closeAutocompleteList()
-                } else {
+                if (currentFocus != -1) {
                     let focusedValue = tagList.querySelector('.autocomplete-active > input').value
                     tagList.insertBefore(createTagObject(focusedValue), document.getElementById('autocomplete'))
                     tagInput.value = ""

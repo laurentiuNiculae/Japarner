@@ -26,7 +26,7 @@ const wordSchema = new mongoose.Schema({
         required: false
     },
     knowledgeLevel : {
-        type: Number,
+        type: String,
         default: 1
     },
     postDate : {
