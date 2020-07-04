@@ -3,10 +3,13 @@ function getWordFormData(form) {
     //get content, reading example
     wordData.content = document.getElementById('word-content').value
     wordData.phoneticReading = document.getElementById('word-reading').value
-    wordData.example = document.getElementById('word-example').value
-    //get meanings
-    const currentWordMeaningsInputs = document.getElementById('word-meanings').querySelectorAll('input');
-    wordData.meanings = Array.from(currentWordMeaningsInputs).map((wordInput) => { return wordInput.value })
+    //get meanings-examples
+    const currentWordMeaningsInputs = document.getElementById('word-meanings-examples').querySelectorAll('.word-input');
+    const currentWordExamplesInputs = document.getElementById('word-meanings-examples').querySelectorAll('.word-example');
+    let wordMeanings = Array.from(currentWordMeaningsInputs).map((wordInput) => { return wordInput.value })
+    let wordExamples = Array.from(currentWordExamplesInputs).map((wordInput) => { return wordInput.value })
+
+    wordData.meanings = wordMeanings.map((wordMeaning, i) => { return { 'meaning': wordMeaning, 'example': wordExamples[i] } })
     //get knowledge level
     let reducer = (accumulator, currentValue) => {
         return accumulator + (currentValue.checked ? parseInt(currentValue.value) : 0)
@@ -20,6 +23,8 @@ function getWordFormData(form) {
     // labels
     wordLabels = document.getElementById('tag-list').querySelectorAll('.tag-element-text')
     wordData.labels = Array.from(wordLabels).map((labelSpan => { return labelSpan.getAttribute('data-value') }))
+
+    console.log(wordData)
     return wordData
 }
 
@@ -41,7 +46,7 @@ async function postWord(wordData) {
     return response.json()
 }
 
-(function () {
+(function setPostWordEvent() {
     var wordForm = document.getElementById('add-word-form')
     wordForm.addEventListener('submit', function (e) {
         e.preventDefault()
@@ -54,16 +59,21 @@ async function postWord(wordData) {
         // make request
         let response = await postWord(wordData)
         //manage the response
+        console.log(response)
     })
 })();
 
-(function addMeaningsEvent() {
+(function setAddMeaningsEvent() {
     let addMoreButton = document.getElementById('add-more-meanings')
 
     addMoreButton.addEventListener('click', (event) => {
         let inputTemplate = document.createElement('template')
-        inputTemplate.innerHTML = '<input type="text" placeholder="Meaning" name = "meaning">'
-        let wordMeanings = document.getElementById('word-meanings')
+        inputTemplate.innerHTML =
+            `<div class="meaning-example-group">
+            <input class="word-input" type="text" placeholder="Meaning" name="meaning">
+            <input class="word-example"type="text" placeholder="Example" name="example">
+        </div>`
+        let wordMeanings = document.getElementById('word-meanings-examples')
         wordMeanings.insertBefore(inputTemplate.content, event.target)
     })
 })();
