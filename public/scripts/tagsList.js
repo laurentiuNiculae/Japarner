@@ -129,7 +129,7 @@ function displayAutocompleteOptions(tagInput, suggestions) {
                 setActive(event.currentTarget.querySelector('#autocomplete-list'))
                 break
             case 'Enter':
-                if (currentFocus != -1) {
+                if (currentFocus !== -1) {
                     let focusedValue = tagList.querySelector('.autocomplete-active > input').value
                     tagList.insertBefore(createTagObject(focusedValue), document.getElementById('autocomplete'))
                     tagInput.value = ""
@@ -139,3 +139,42 @@ function displayAutocompleteOptions(tagInput, suggestions) {
         }
     })
 })();
+
+async function postLabel(labelData) {
+    let response
+    try {
+        response = await fetch('/api/labels', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(labelData)
+        })
+    } catch (error) {
+        console.error('Fetch Error', error)
+        response.error = error
+    }
+    return response.json()
+}
+
+
+(function addPostLabelEvent() {
+    let labelForm = document.getElementById('create-label-form')
+    labelForm.addEventListener('submit', async (event) => {
+        event.preventDefault()
+
+        let labelData = {}
+        labelData.content = labelForm.querySelector('input').value
+
+        // test if it's ok to add.
+
+        let response = await postLabel(labelData)
+        if(labelData.success = true){
+            labelArray.push(labelData.content)
+        }
+        labelForm.querySelector('input').value = ""
+
+    })
+
+}) ();

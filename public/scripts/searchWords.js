@@ -4,20 +4,18 @@ let currentQuery = {}
 function getSearchParameters() {
 
     searchLabelsInputs = document.querySelectorAll('#tag-list .tag-element-text')
-    let searchLabels = Array.from(searchLabelsInputs).map(labelSpan => { return labelSpan.getAttribute('data-value') })
+    const searchLabels = Array.from(searchLabelsInputs).map(labelSpan => { return labelSpan.getAttribute('data-value') })
 
-    let searchKnowledgeInputs = document.querySelectorAll('#search-criteria-knowledge-level input')
-    let searchKnowledge = Array.from(searchKnowledgeInputs).map(checkbox => { return checkbox.checked ? checkbox.value : 0 })
-    searchKnowledge = searchKnowledge.filter(e => e != 0)
+    const searchKnowledgeInputs = document.querySelectorAll('#search-criteria-knowledge-level input')
+    const searchKnowledge = Array.from(searchKnowledgeInputs).map(checkbox => { return checkbox.checked ? checkbox.value : 0 }).filter(e => e != 0)
 
-    let wordLimit = document.getElementById('word-limit')
-    wordLimit = wordLimit.value
+    const wordLimit = document.getElementById('word-limit').value
 
     let query = {}
-    if (searchKnowledge.length != 0) {
+    if (searchKnowledge.length !== 0) {
         query.knowledgeLevel = searchKnowledge
     }
-    if (searchLabels.length != 0) {
+    if (searchLabels.length !== 0) {
         query.labels = searchLabels
     }
     query.limit = wordLimit
@@ -42,7 +40,7 @@ function refreshWordsPool(responseContent) {
     words.forEach((e) => {
         let listItem = templateListItem.cloneNode(true).content
         listItem.querySelector('.word-content').innerHTML = e.content
-        listItem.querySelector('.word-meaning').innerHTML = e.meanings[0]
+        listItem.querySelector('.word-meaning').innerHTML = e.meanings[0].meaning
         templateAllItems.content.appendChild(listItem)
     })
 
@@ -66,8 +64,8 @@ function refreshWordsPool(responseContent) {
 }
 
 async function getWords(query = {}) {
-    let myURL = new URLSearchParams(query)
-    let response = await fetch('/api/words?' + myURL.toString(), {
+    let searchQuery = new URLSearchParams(query)
+    let response = await fetch('/api/words?' + searchQuery.toString(), {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
@@ -78,7 +76,7 @@ async function getWords(query = {}) {
 }
 
 (function addSearchEvent() {
-    let button = document.getElementById('search-button')
+    let button = document.getElementById('word-search-button')
 
     button.addEventListener('click', async (event) => {
         currentQuery = getSearchParameters()

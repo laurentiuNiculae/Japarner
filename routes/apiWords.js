@@ -6,11 +6,11 @@ const Word = require('../models/word')
 
 router.get('/', checkAuthenticated, paginatedResults(Word) ,async (req, res) => { //
 
-    let response = {}
-    response.success = true
-    response.content = res.paginatedResults
-    response.error = {}
-   console.log(response)
+    const response = {
+        success: true,
+        content: res.paginatedResults,
+        error: {}
+    }
     res.json(response)
 })
 

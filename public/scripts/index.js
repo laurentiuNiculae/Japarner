@@ -16,7 +16,7 @@ function getWordFormData(form) {
     }
     let knowledgeRateSelector = document.getElementById('word-knowledge-rate').querySelectorAll('input')
     wordData.knowledgeLevel = Array.from(knowledgeRateSelector).reduce(reducer, 0).toString()
-    if (wordData.knowledgeLevel == '0') {
+    if (wordData.knowledgeLevel === '0') {
         wordData.knowledgeLevel = '1';
     }
 
