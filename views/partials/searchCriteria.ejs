@@ -4,7 +4,7 @@
         <%- include ("labelsTags") %>
     </div>
 
-    <div class="search-criteria-knowledge-level">
+    <div id="search-criteria-knowledge-level" class="search-criteria-knowledge-level">
         <div class="search-criteria-check-box">
             <span> Unknown </span>
             <input type="checkbox" value="1">
@@ -18,5 +18,12 @@
             <input type="checkbox" value="3">
         </div>
     </div>
-    <button id="search-button" class="search-button" type="submit"> Search! </button>
+    <select name="word-limit" id="word-limit">
+        <option value="1">1</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+    </select>
+    <button id="word-search-button" class="search-button" type="submit"> Search! </button>
 </div>

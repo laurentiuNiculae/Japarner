@@ -13,20 +13,22 @@ const wordSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    meanings : {
-        type: [String],
-        required: true
-    },
-    example : {
-        type: String,
-        required: false
-    },
+    meanings : [{
+        meaning: {
+            type: String,
+            required: true
+        },
+        example : {
+            type: String,
+            required: false
+        }
+    }],
     labels:{
         type: [String],
         required: false
     },
     knowledgeLevel : {
-        type: Number,
+        type: String,
         default: 1
     },
     postDate : {

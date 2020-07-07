@@ -1,9 +1,11 @@
 <%- include ("partials/searchCriteria") %>
 <div class="word-table">
     <h2>Vocabulary</h2>
-    <ul class="word-list">
-        <% words.forEach(word => { %>
-            <li> <%= word.content %> </li> <br>
-         <% }); %>
+    <div id="page-navigation" class="page-navigation">
+        <button id="previous-button" class="previous-button"> Back </button>
+        <button id="next-button" class="next-button"> Next </button>
+    </div>
+    <ul id ="word-list" class="word-list">
     </ul>
 </div>
+<script src="scripts/searchWords.js"></script>
