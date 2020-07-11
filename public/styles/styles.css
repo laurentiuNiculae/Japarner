@@ -64,3 +64,9 @@
 .autocomplete-active{
     background: blue !important;
 }
+
+
+
+.hidden{
+    display: none;
+}

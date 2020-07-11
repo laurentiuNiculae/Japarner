@@ -5,6 +5,9 @@ function findLabelSuggestions(input) {
     if (input === '') {
         return []
     }
+    if( input === ' '){
+        return labelArray
+    }
     let suggestions = []
 
     suggestions = labelArray.filter(element => {
