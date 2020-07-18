@@ -28,10 +28,10 @@ router.get('/choose', checkAuthenticated, (req, res) => {
 })
 
 router.post('/choose', checkAuthenticated, (req, res) => {
-    //test parameters by counting how many words are there.
+    //test parameters by counting how many words are there. There should be more than 1
     //if ok set req.session.practice as follows 
-    req.session.query={}
-    req.session.query.knowledgeLevel = req.query.knowledgeLevel? req.query.knowledgeLevel.split(',') : null
+    req.session.query = {}
+    req.session.query.knowledgeLevel = req.query.knowledgeLevel ? req.query.knowledgeLevel.split(',') : null
     req.session.query.labels = req.query.labels ? req.query.labels.split(',') : null
     req.session.lastAccessed = 1
     res.redirect('/practice')
@@ -46,7 +46,7 @@ router.get('/words', checkAuthenticated, checkPracticeSession, practicePaginated
     res.json(response)
 })
 
-router.delete('/', (req, res) => {
+router.delete('/', checkAuthenticated, (req, res) => {
     req.session.query = null
     res.redirect('/words')
 })
