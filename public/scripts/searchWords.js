@@ -50,8 +50,16 @@ function refreshWordsPool(responseContent) {
     const previousButton = document.getElementById('previous-button')
     const nextButton = document.getElementById('next-button')
 
-    previousButton.style.display = previous ? 'block' : 'none';
-    nextButton.style.display = next ? 'block' : 'none';
+    if (previous) {
+        previousButton.style.display = 'block'
+    } else {
+        previousButton.style.display = 'none'
+    }
+    if (next) {
+        nextButton.style.display = 'block'
+    } else {
+        nextButton.style.display = 'none'
+    }
 
 }
 
