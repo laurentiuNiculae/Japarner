@@ -1,14 +1,10 @@
-let previous = null
-let next = null
 let currentWord = null
-let lastAccessed = null
-let currentPageNumber = null
+let currentWordIndex = null
+let allWords = null
+async function getWords(index = null) {
 
-async function getWord(index = null) {
-    let searchQuery
-    let fetchUrl
-    index ? searchQuery = new URLSearchParams({ page: index }) : searchQuery = null
-    searchQuery ? fetchUrl = '/practice/words?' + searchQuery.toString() : fetchUrl = '/practice/words'
+    //get all practice words
+    const fetchUrl = '/practice/words'
     console.log(fetchUrl)
     let response = await fetch(fetchUrl, {
         headers: {
@@ -20,40 +16,56 @@ async function getWord(index = null) {
     return await response.json()
 }
 
+function shuffle(array) {
+    var m = array.length, t, i;
+  
+    // While there remain elements to shuffle…
+    while (m) {
+  
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+  
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+  
+    return array;
+  }
+
+
 function loadWordData() {
     const wordContent = document.getElementById('word-content-text')
     const wordExample = document.getElementById('word-example-text')
     const wordReading = document.getElementById('word-reading-text')
     const wordMeaning = document.getElementById('word-meaning-text')
 
-    console.log(next, previous)
     wordContent.innerText = currentWord.content
     wordExample.innerText = currentWord.meanings[0].example
     wordMeaning.innerText = currentWord.meanings[0].meaning
     wordReading.innerText = currentWord.phoneticReading
     if (true) {
-        wordExample.classList.add('hidden')
-        wordMeaning.classList.add('hidden')
-        wordReading.classList.add('hidden')
+        wordExample.style.display = 'none'
+        wordMeaning.style.display = 'none'
+        wordReading.style.display = 'none'
     }
     const nextButton = document.getElementById('next')
     const previousButton = document.getElementById('previous')
-
-    !next ? nextButton.classList.add('hidden') : nextButton.classList.remove('hidden')
-    !previous ? previousButton.classList.add('hidden') : previousButton.classList.remove('hidden')
+    currentWordIndex == allWords.length - 1 ? nextButton.disabled = true : nextButton.disabled = false
+    currentWordIndex == 0 ? previousButton.disabled = true : previousButton.disabled = false
 
 }
 
 (function initializeWord() {
 
     window.addEventListener('load', async (event) => {
-        response = await getWord()
-        currentWord = response.content.results[0]
-        next = response.content.next
-        previous = response.content.previous
-        lastAccessed = response.content.lastAccessed
-        currentPageNumber = lastAccessed
-        console.log('YES',lastAccessed)
+        response = await getWords()
+        console.log(response)
+        allWords = shuffle(response.content.results)
+        console.log(allWords)
+        currentWord = allWords[0]
+        currentWordIndex = 0
         loadWordData()
     })
 
@@ -69,21 +81,12 @@ function loadWordData() {
     const showMeaningButton = document.getElementById('show-meaning-button')
 
     nextButton.addEventListener('click', async (event) => {
-        let response = await getWord(next.page)
-        console.log(response)
-        currentWord = response.content.results[0]
-        next = response.content.next
-        previous = response.content.previous
-        currentPageNumber++
+        currentWord = allWords[++currentWordIndex]
         loadWordData()
     })
 
     previousButton.addEventListener('click', async (event) => {
-        let response = await getWord(previous.page)
-        currentWord = response.content.results[0]
-        next = response.content.next
-        previous = response.content.previous
-        currentPageNumber--
+        currentWord = allWords[--currentWordIndex]
         loadWordData()
     })
 
@@ -99,15 +102,15 @@ function loadWordData() {
     })
 
     showExampleButton.addEventListener('click', (event) => {
-        document.getElementById('word-example-text').classList.remove('hidden')
+        document.getElementById('word-example-text').style.display = 'inline-block'
     })
 
     showReadingButton.addEventListener('click', (event) => {
-        document.getElementById('word-reading-text').classList.remove('hidden')
+        document.getElementById('word-reading-text').style.display = 'inline-block'
     })
 
     showMeaningButton.addEventListener('click', (event) => {
-        document.getElementById('word-meaning-text').classList.remove('hidden')
+        document.getElementById('word-meaning-text').style.display = 'inline-block'
     })
 
 

@@ -1,3 +1,13 @@
+html {
+ zoom: 1.75;
+ min-height: 130vh;
+}
+body{
+    display: flex;
+    flex-flow: column;
+}
+/*  */
+
 .rate * , 
 .knowledge-level > p{
     margin: 0;
@@ -69,4 +79,154 @@
 
 .hidden{
     display: none;
+}
+
+/* header */
+
+header {
+    display: flex;
+    background-color: red;
+    color: white;
+}
+header a {
+    color: white;
+    text-decoration: none;
+}
+.header-logo-image{
+    display: flex;
+    justify-content: center;
+    width: 40%;
+}
+.header-decoration-line{
+    background-color: darkblue;
+    height: 0.5em;
+}
+.header-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2%;
+}
+.header-link:hover {
+    cursor: pointer;
+}
+.header-link:hover a {
+    text-decoration: underline;
+}
+
+.page-title{
+    margin-left: 20%;
+    font-size: large;
+    display: flex;
+    justify-content: flex-start;
+}
+/* /header */
+
+/* add words form*/ 
+
+.add-word-form{
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    margin-left: 20%;
+    width: 60%
+}
+.add-word-form input{
+    width: 100%;
+}
+
+.add-word-form > input {
+    margin-bottom: 1em;
+}
+
+.meaning-example-group{
+    width: 100%;
+    margin-bottom: 1em;
+}
+.meaning-example-group > input{
+    margin-bottom: 0.5em;
+}
+.meanings{
+    width: 100%;
+}
+
+/*   */
+
+/*search-criteria*/
+.search-criteria{
+margin-left: 20%;
+margin-right: 20%;
+}
+
+
+.search-criteria-labels-tag{
+    width: 100%;
+}
+.labels-tags{
+    width: 100%;
+}
+.word-list{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    max-height: 500px;
+}
+.word-list li {
+    border: 2px red solid;
+    padding: 4px;
+    border-radius: 4px;
+    display: inline;
+    margin: 10px;
+}
+li .word-content{
+    text-align: center;
+}
+
+/* **** PRACTICE **** */ 
+
+.word-content span{
+    font-size: 50px;
+    border: 2px red solid;
+    border-radius: 5px;
+    padding: 4px;
+}
+.word-data{
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    width: 60%;
+    margin-left: 20%;
+    min-height: 200px;
+}
+.extra-info{ 
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.word-content{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+#close-session{
+    width: 4em;
+    height: 2em;
+}
+
+.next-prev-buttons{
+    display: flex; 
+}
+
+.hints{
+    display: flex;
+    justify-content: space-between;
+}
+.hints div {
+    width: 33%;
+}
+.hints div > span {
+    border: 1px rgb(226, 31, 31) solid;
+    border-radius: 2px;
+    width: 100%;
+    text-align: center;
 }
