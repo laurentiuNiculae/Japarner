@@ -51,6 +51,11 @@ async function postWord(wordData) {
     wordForm.addEventListener('submit', function (e) {
         e.preventDefault()
     })
+    function resetForm(){
+        const formInputs = wordForm.querySelectorAll("input")
+        formInputs.forEach(input => input.value = "")
+        formInputs[0].focus()
+    }
 
     var submitButton = document.getElementById('submit-word')
     submitButton.addEventListener('click', async function (e) {
@@ -59,7 +64,14 @@ async function postWord(wordData) {
         // make request
         let response = await postWord(wordData)
         //manage the response
-        console.log(response)
+        if(response.success){
+            resetForm()
+        } else {
+            alert(response.error.message)
+        }
+        //display message
+        
+        
     })
 })();
 
