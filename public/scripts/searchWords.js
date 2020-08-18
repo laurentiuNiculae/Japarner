@@ -24,6 +24,7 @@ function getSearchParameters() {
 }
 
 function refreshWordsPool(responseContent) {
+    console.log(responseContent)
     const words = responseContent.results
     const previous = responseContent.previous
     const next = responseContent.next
@@ -33,14 +34,24 @@ function refreshWordsPool(responseContent) {
     let wordMeaning = document.createElement('div')
     templateListItem.innerHTML =
         `<li>
+        <button class="edit-button"></button>
         <div class="word-content"></div>
         <div class="word-meaning"></div>
     </li>`
 
-    words.forEach((e) => {
+    words.forEach((e, index) => {
         let listItem = templateListItem.cloneNode(true).content
         listItem.querySelector('.word-content').innerHTML = e.content
         listItem.querySelector('.word-meaning').innerHTML = e.meanings[0].meaning
+        const editButton = listItem.querySelector('.edit-button')
+        editButton.value = index
+        editButton.addEventListener('click', (event) => {
+            let wordData = words[event.target.value]
+            console.log(wordData)
+            //open a new thing
+            //you are able to change everything
+            //
+        })
         templateAllItems.content.appendChild(listItem)
     })
 
@@ -52,7 +63,6 @@ function refreshWordsPool(responseContent) {
 
     previousButton.style.display = previous ? 'block' : 'none';
     nextButton.style.display = next ? 'block' : 'none';
-
 }
 
 async function getWords(query = {}) {

@@ -1,26 +1,34 @@
-<button type="button" id="close-session">Close Session</button>
-<div>
-    <button id="show-example-button">Example</button>
-    <button id="show-reading-button">Reading</button>
-    <button id="show-meaning-button">Meaning</button>
-</div>
-<div id="word-data">
-    <div class="word-content">
-        <span id="word-content-text"></span>
-    </div>
-    <div class="word-example">
-        <span id="word-example-text"></span>
-    </div>
-    <div class="word-reading">
-        <span id="word-reading-text"></span>
-    </div>
-    <div class="word-meaning">
-        <span id="word-meaning-text"></span>
-    </div>
-</div>
-<button id="previous" type="button">previous</button>
-<button id="next" type="button">next</button>
+<%- include ("../partials/header") %>
+<button type="button" id="close-session">Quit</button>
 
-<input class="meaning-input" type="text">
-<input class="reading-input" type="text">
+<div id="word-data" class="word-data">
+    <div class="extra-info">
+        <button id="show-example-button">Example</button>
+        <button id="show-reading-button">Reading</button>
+        <button id="show-meaning-button">Meaning</button>
+    </div>
+
+    <div class="word-content">
+        <span id="word-content-text"> </span>
+    </div>
+    <div class="hints">
+        <div class="word-example">
+            <span id="word-example-text"></span>
+        </div>
+        <div class="word-reading">
+            <span id="word-reading-text"></span>
+        </div>
+        <div class="word-meaning">
+            <span id="word-meaning-text"></span>
+        </div>
+    </div>
+</div>
+<div class="knowledge-positioner">
+<%- include ("../partials/knowledgeLevel") %>
+</div>
+<div class="next-prev-buttons">
+    <button id="previous" type="button">previous</button>
+    <button id="next" type="button">next</button>
+</div>
+
 <script src="/scripts/practice.js"></script>

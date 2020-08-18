@@ -42,8 +42,8 @@ function paginatedResults(model) {
 
 function practicePaginatedResults(model) {
     return async (req, res, next) => {
-        const page = req.query.page ? parseInt(req.query.page) : req.session.lastAccessed
-        const limit = 1
+        const page = 0
+        const limit = NaN
         const startIndex = (page - 1) * limit
         const endIndex = page * limit
 
