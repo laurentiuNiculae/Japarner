@@ -5,7 +5,6 @@ async function getWords(index = null) {
 
     //get all practice words
     const fetchUrl = '/practice/words'
-    console.log(fetchUrl)
     let response = await fetch(fetchUrl, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -53,7 +52,6 @@ function loadWordData() {
     }
     const nextButton = document.getElementById('next')
     const previousButton = document.getElementById('previous')
-    console.log('!!!!!!!!!!!!!!!! ',currentWord.knowledgeLevel)
 
     knowledgeLevelRate.querySelectorAll('input')[3 - currentWord.knowledgeLevel].checked = true
 
@@ -67,9 +65,7 @@ function loadWordData() {
 
     window.addEventListener('load', async (event) => {
         response = await getWords()
-        console.log(response)
         allWords = shuffle(response.content.results)
-        console.log(allWords)
         currentWord = allWords[0]
         currentWordIndex = 0
         loadWordData()
@@ -102,7 +98,6 @@ function loadWordData() {
             method: 'delete',
             credentials: 'include'
         })
-        console.log(response)
         if (response.redirected) {
             window.location.href = response.url
         }
@@ -120,7 +115,6 @@ function loadWordData() {
         document.getElementById('word-meaning-text').style.display = 'inline-block'
     })
     knowledgeLevelRate.addEventListener('change', async (event) => {
-        console.log("it has bubbled", event.target, currentWord)
         currentWord.knowledgeLevel = event.target.value
         let response = await fetch('/api/words', {
             headers: {
@@ -131,7 +125,6 @@ function loadWordData() {
             body: JSON.stringify(currentWord)
         })
         response = await response.json()
-        console.log(response)
     })
 
 

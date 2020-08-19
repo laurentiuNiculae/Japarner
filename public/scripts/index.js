@@ -24,7 +24,6 @@ function getWordFormData(form) {
     wordLabels = document.getElementById('tag-list').querySelectorAll('.tag-element-text')
     wordData.labels = Array.from(wordLabels).map((labelSpan => { return labelSpan.getAttribute('data-value') }))
 
-    console.log(wordData)
     return wordData
 }
 

@@ -16,13 +16,11 @@ router.get('/', checkAuthenticated, paginatedResults(Word), async (req, res) => 
 
 router.post('/', checkAuthenticated, async (req, res) => {
     let response = {}
-    console.log(req.body)
 
     if (await Word.exists({ content: req.body.content })) {
         response.content = {}
         response.success = false
         response.error = { message: "This word already exists" }
-        console.log("exists!!!")
         res.json(response)
     } else {
         let word = new Word({
@@ -50,7 +48,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
 
 router.put('/', checkAuthenticated, async (req, res) => {
     let response = {}
-    console.log(req.body)
     try {
         let currentWord = await Word.findOne({ ownerId: req.body.ownerId, content: req.body.content })
         currentWord.knowledgeLevel = req.body.knowledgeLevel

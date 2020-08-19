@@ -24,7 +24,6 @@ function getSearchParameters() {
 }
 
 function refreshWordsPool(responseContent) {
-    console.log(responseContent)
     const words = responseContent.results
     const previous = responseContent.previous
     const next = responseContent.next
@@ -47,7 +46,6 @@ function refreshWordsPool(responseContent) {
         editButton.value = index
         editButton.addEventListener('click', (event) => {
             let wordData = words[event.target.value]
-            console.log(wordData)
             //open a new thing
             //you are able to change everything
             //
