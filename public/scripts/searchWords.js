@@ -40,8 +40,8 @@ function refreshWordsPool(responseContent) {
 
     words.forEach((e, index) => {
         let listItem = templateListItem.cloneNode(true).content
-        listItem.querySelector('.word-content').innerHTML = e.content
-        listItem.querySelector('.word-meaning').innerHTML = e.meanings[0].meaning
+        listItem.querySelector('.word-content').innerText = e.content
+        listItem.querySelector('.word-meaning').innerText = e.meanings[0].meaning
         const editButton = listItem.querySelector('.edit-button')
         editButton.value = index
         editButton.addEventListener('click', (event) => {
@@ -83,6 +83,7 @@ async function getWords(query = {}) {
         currentQuery.page = 1
         currentPage = 1
         let response = await getWords(currentQuery)
+        console.log(response.content)
         refreshWordsPool(response.content)
     })
 
