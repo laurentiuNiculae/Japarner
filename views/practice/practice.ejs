@@ -1,6 +1,16 @@
 <%- include ("../partials/header") %>
-<button type="button" id="close-session">Quit</button>
-
+<div class="button-holder">
+    <button type="button" id="close-session">Quit</button>
+    <div class="help-sign">
+        <span>1</span>
+        <div class="help-explanation">
+            In the practice session you will see the words from your selected word pool displayed randomly. The idea is to read them and understand their meaning.
+            If you don't know it you can show the 3 hints. After that, you can change the knowledge level based on how much you feel you know it. <br>
+            <b>Refresh the page to randomize the words again!</b>
+        </div>
+    </div>
+    <button type="button" id="change-practice-type">JE</button>
+</div>
 <div id="word-data" class="word-data">
     <div class="extra-info">
         <button id="show-example-button">Example</button>
@@ -24,7 +34,7 @@
     </div>
 </div>
 <div class="knowledge-positioner">
-<%- include ("../partials/knowledgeLevel") %>
+    <%- include ("../partials/knowledgeLevel") %>
 </div>
 <div class="next-prev-buttons">
     <button id="previous" type="button">previous</button>

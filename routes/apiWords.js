@@ -23,6 +23,9 @@ router.post('/', checkAuthenticated, async (req, res) => {
         response.error = { message: "This word already exists" }
         res.json(response)
     } else {
+        if (!req.body.knowledgeLevel) {
+            req.body.knowledgeLevel = 1
+        }
         let word = new Word({
             ownerId: req.user._id.toString(),
             content: req.body.content,
@@ -32,6 +35,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
             labels: req.body.labels,
             knowledgeLevel: req.body.knowledgeLevel
         })
+        console.log(word)
         try {
             response.content = await word.save()
             response.success = true

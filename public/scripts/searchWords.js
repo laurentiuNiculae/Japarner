@@ -59,8 +59,8 @@ function refreshWordsPool(responseContent) {
     const previousButton = document.getElementById('previous-button')
     const nextButton = document.getElementById('next-button')
 
-    previousButton.style.display = previous ? 'block' : 'none';
-    nextButton.style.display = next ? 'block' : 'none';
+    previousButton.disabled = previous ? false : true;
+    nextButton.disabled = next ? false : true;
 }
 
 async function getWords(query = {}) {
@@ -112,4 +112,9 @@ async function getWords(query = {}) {
         let response = await getWords(currentQuery)
         refreshWordsPool(response.content)
     })
+})();
+
+(function setHelpNotes(){
+    const helpText = document.querySelector(".labels-tags .help-explanation")
+    helpText.innerHTML = 'Add categories here to search for specific words. Also, select from what kinds of knowledge levels you want your words. Then how many words to be displayed and click search or start a practice session!'
 })();
