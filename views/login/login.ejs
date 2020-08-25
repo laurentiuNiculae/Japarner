@@ -1,11 +1,10 @@
-<h1>login</h1>
+<h1 class="login-title">Japarner Login</h1>
 <% if (messages.error){ %>
 <%= messages.error %>
 <% } %>
-<form method="POST" action="/login">
-    <input type="text" id="username" name="username" placeholder="Username">
+<form method="POST" action="/login" class="login-form">
     <input type="email" id="email" name="email" placeholder="Email">
     <input type="password" id="password" name="password" placeholder="Password">
     <button type="submit">Login</button>
+    <a href="/register">Register</a>
 </form>
-<a href="/register">Register</a>

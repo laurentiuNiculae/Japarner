@@ -51,7 +51,7 @@ async function postWord(wordData) {
         e.preventDefault()
     })
     function resetForm(){
-        const formInputs = wordForm.querySelectorAll("input")
+        const formInputs = document.querySelectorAll("#word-meanings-examples input, #add-word-form > input")
         formInputs.forEach(input => input.value = "")
         formInputs[0].focus()
     }

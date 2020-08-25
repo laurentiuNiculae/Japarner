@@ -5,6 +5,7 @@ html {
 body{
     display: flex;
     flex-flow: column;
+    background-color: rgb(255, 255, 255);
 }
 /*  */
 .knowledge-positioner{
@@ -107,6 +108,7 @@ header a {
 .header-decoration-line{
     background-color: darkblue;
     height: 0.5em;
+    position: relative;
 }
 .header-link{
     display: flex;
@@ -130,8 +132,11 @@ header a {
 /* /header */
 
 /* add words form*/ 
+.add-more-meanings {
+    display: none
+}
 
-.add-word-form{
+.add-word-form {
     display: flex;
     flex-flow: column;
     align-items: flex-start;
@@ -157,6 +162,41 @@ header a {
     width: 100%;
 }
 
+.add-categories-title{
+    display: inline;
+}
+.help-sign{
+    display: inline;
+    position: relative;
+}
+.help-sign > span{
+    border: red solid 1px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50px;
+    width: 17px;
+    height: 17px;
+}
+.help-explanation{
+    display: none;
+}
+.help-sign:hover > .help-explanation{
+    display: inline-block;
+    position: absolute;
+    border: 1px rgb(37, 37, 37) solid;
+    background-color: white;
+    width: 16em;
+    z-index: 10;
+}
+
+.create-label-title{
+    display: inline-block
+}
+
+.label-text-input{
+    display: block;
+}
+
 /*   */
 
 /*search-criteria*/
@@ -179,12 +219,13 @@ margin-right: 20%;
     max-height: 500px;
 }
 .word-list li {
-    border: 2px red solid;
+    border: 1px red solid;
     padding: 4px;
     border-radius: 4px;
     display: inline;
     margin: 10px;
     position: relative;
+    background-color: white;
 }
 .edit-button{
     position: absolute;
@@ -228,6 +269,17 @@ li .word-content{
 #close-session{
     width: 4em;
     height: 2em;
+    display: inline-block;
+}
+#change-practice-type{
+    width: 2em;
+    height: 2em;
+    right: 0px;
+    display: inline-block;
+    position: absolute;
+}
+.button-holder{
+    position: relative;
 }
 
 .next-prev-buttons{
@@ -247,3 +299,19 @@ li .word-content{
     width: 100%;
     text-align: center;
 }
+/* LOGIN REGISTER */
+
+.login-form, .register-form{
+    display: flex;
+    flex-flow: column;
+    width: 40%;
+    align-self: center;
+}
+.login-form > *, .register-form > *  {
+    margin: 0.5em;
+}
+.login-title, .register-title{
+    display: flex;
+    align-self: center;
+}
+

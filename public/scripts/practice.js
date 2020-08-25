@@ -1,6 +1,7 @@
 let currentWord = null
 let currentWordIndex = null
 let allWords = null
+let practiceType = "JE"
 async function getWords(index = null) {
 
     //get all practice words
@@ -41,9 +42,16 @@ function loadWordData() {
     const wordMeaning = document.getElementById('word-meaning-text')
     const knowledgeLevelRate = document.getElementById('word-knowledge-rate')
 
-    wordContent.innerText = currentWord.content
+    if(practiceType === "JE"){
+        wordContent.innerText = currentWord.content
+        wordMeaning.innerText = currentWord.meanings[0].meaning
+    } else if (practiceType === "EJ") {
+        wordContent.innerText = currentWord.meanings[0].meaning
+        wordMeaning.innerText = currentWord.content
+    }
+
+
     wordExample.innerText = currentWord.meanings[0].example
-    wordMeaning.innerText = currentWord.meanings[0].meaning
     wordReading.innerText = currentWord.phoneticReading
     if (true) {
         wordExample.style.display = 'none'
@@ -52,9 +60,7 @@ function loadWordData() {
     }
     const nextButton = document.getElementById('next')
     const previousButton = document.getElementById('previous')
-
     knowledgeLevelRate.querySelectorAll('input')[3 - currentWord.knowledgeLevel].checked = true
-
     currentWordIndex == allWords.length - 1 ? nextButton.disabled = true : nextButton.disabled = false
     currentWordIndex == 0 ? previousButton.disabled = true : previousButton.disabled = false
 
@@ -82,6 +88,7 @@ function loadWordData() {
     const showReadingButton = document.getElementById('show-reading-button')
     const showMeaningButton = document.getElementById('show-meaning-button')
     const knowledgeLevelRate = document.getElementById('word-knowledge-rate')
+    const changePracticeTypeButton = document.getElementById('change-practice-type')
 
     nextButton.addEventListener('click', async (event) => {
         currentWord = allWords[++currentWordIndex]
@@ -125,6 +132,11 @@ function loadWordData() {
             body: JSON.stringify(currentWord)
         })
         response = await response.json()
+    })
+    changePracticeTypeButton.addEventListener('click', (event) => {
+        practiceType = practiceType === 'JE' ? 'EJ' : 'JE'
+        changePracticeTypeButton.innerHTML = practiceType
+        loadWordData()
     })
 
 
